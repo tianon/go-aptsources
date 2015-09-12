@@ -7,6 +7,7 @@ import (
 	"pault.ag/go/debian/control"
 )
 
+// http://manpages.debian.org/cgi-bin/man.cgi?manpath=experimental&query=sources.list
 type Source struct {
 	control.Paragraph
 
