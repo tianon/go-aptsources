@@ -24,9 +24,9 @@ type Source struct {
 
 func (source Source) ListString() string {
 	ret := []string{}
-	for _, t := range source.Types {
-		for _, uri := range source.URIs {
-			for _, suite := range source.Suites {
+	for _, uri := range source.URIs {
+		for _, suite := range source.Suites {
+			for _, t := range source.Types {
 				// TODO Architectures
 				ret = append(ret, fmt.Sprintf("%s %s %s %s", t, uri, suite, strings.Join(source.Components, " ")))
 			}
