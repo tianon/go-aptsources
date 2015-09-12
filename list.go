@@ -52,5 +52,5 @@ func (sources Sources) ListString() string {
 			ret = append(ret, str)
 		}
 	}
-	return strings.Join(ret, "\n")
+	return strings.Join(ret, "\n\n")
 }
