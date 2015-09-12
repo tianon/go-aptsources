@@ -41,8 +41,8 @@ func New(source ...Source) Sources {
 	return Sources(source)
 }
 
-func (sources Sources) Add(source Source) Sources {
-	return append(sources, source)
+func (sources Sources) Append(source ...Source) Sources {
+	return append(sources, source...)
 }
 
 func (sources Sources) ListString() string {
