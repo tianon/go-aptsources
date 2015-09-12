@@ -11,15 +11,20 @@ func SuiteSources(suite string, components ...string) Sources {
 		Suites:     []string{suite},
 		Components: components,
 	}
-	switch {
-	case suite == "experimental", suite == "rc-buggy":
+	switch suite {
+	case "experimental", "rc-buggy":
 		source.Suites = append([]string{"sid"}, source.Suites...)
 		fallthrough
-	case suite == "sid", suite == "unstable":
+	case "sid", "unstable":
 		return New(source)
-	case strings.HasSuffix(suite, "-backports"):
-		suite = suite[:len(suite)-len("-backports")]
-		source.Suites = append([]string{suite}, source.Suites...)
+	}
+	origSuite := suite
+	for _, suffix := range []string{"backports", "lts"} {
+		suffix = "-" + suffix
+		if strings.HasSuffix(suite, suffix) {
+			suite = suite[:len(suite)-len(suffix)]
+			source.Suites = append([]string{suite}, source.Suites...)
+		}
 	}
 	source.Suites = append(source.Suites, suite+"-updates")
 	sources := New(source, Source{
@@ -30,12 +35,14 @@ func SuiteSources(suite string, components ...string) Sources {
 	})
 	switch suite {
 	case "squeeze":
-		sources = sources.Append(Source{
-			Types:      source.Types,
-			URIs:       source.URIs,
-			Suites:     []string{suite + "-lts"},
-			Components: source.Components,
-		})
+		if origSuite != suite+"-lts" {
+			sources = sources.Append(Source{
+				Types:      source.Types,
+				URIs:       source.URIs,
+				Suites:     []string{suite + "-lts"},
+				Components: source.Components,
+			})
+		}
 	}
 	return sources
 }
