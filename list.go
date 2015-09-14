@@ -39,7 +39,7 @@ func (source Source) ListString() string {
 				parts = append(parts, uri, suite)
 				if len(source.Components) > 0 {
 					parts = append(parts, strings.Join(source.Components, " "))
-				}
+				} // else if !strings.HasSuffix(suite, "/") { ERROR }
 				ret = append(ret, strings.Join(parts, " "))
 			}
 		}
