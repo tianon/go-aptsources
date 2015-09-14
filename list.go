@@ -28,8 +28,19 @@ func (source Source) ListString() string {
 	for _, uri := range source.URIs {
 		for _, suite := range source.Suites {
 			for _, t := range source.Types {
-				// TODO Architectures
-				ret = append(ret, fmt.Sprintf("%s %s %s %s", t, uri, suite, strings.Join(source.Components, " ")))
+				options := []string{}
+				if len(source.Architectures) > 0 {
+					options = append(options, fmt.Sprintf("arch=%s", strings.Join(source.Architectures, ",")))
+				}
+				parts := []string{t}
+				if len(options) > 0 {
+					parts = append(parts, fmt.Sprintf("[ %s ]", strings.Join(options, " ")))
+				}
+				parts = append(parts, uri, suite)
+				if len(source.Components) > 0 {
+					parts = append(parts, strings.Join(source.Components, " "))
+				}
+				ret = append(ret, strings.Join(parts, " "))
 			}
 		}
 	}

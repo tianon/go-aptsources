@@ -15,7 +15,7 @@ func (source Source) fetch(can *resolver.Candidates, arches ...string) error {
 		}
 		for _, uri := range source.URIs {
 			for _, suite := range source.Suites {
-				for _, component := range source.Components {
+				for _, component := range source.Components { // TODO add support for no components (suite/)
 					for _, arch := range arches {
 						if err := resolver.AppendBinaryIndex(can, uri, suite, component, arch); err != nil {
 							return err
