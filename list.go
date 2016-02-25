@@ -57,6 +57,10 @@ func (sources Sources) Append(source ...Source) Sources {
 	return append(sources, source...)
 }
 
+func (sources Sources) Prepend(source ...Source) Sources {
+	return append(source, sources...)
+}
+
 func (sources Sources) ListString() string {
 	ret := []string{}
 	for _, s := range sources {
