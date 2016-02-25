@@ -9,6 +9,8 @@ import (
 	"pault.ag/go/resolver"
 )
 
+// TODO rewrite all this
+
 var compressions = []string{".bz2", ".gz", ""}
 
 func fetchCandidates(can *resolver.Candidates, url string) error {
@@ -17,7 +19,7 @@ func fetchCandidates(can *resolver.Candidates, url string) error {
 		if err != nil {
 			return err
 		}
-		if resp.StatusCode != 200 {
+		if resp.StatusCode != http.StatusOK {
 			resp.Body.Close()
 			continue
 		}
