@@ -37,7 +37,7 @@ func fetchCandidates(can *resolver.Candidates, url string) error {
 		}
 		return can.AppendBinaryIndexReader(resp.Body)
 	}
-	return fmt.Errorf("unable to find %s (tried all of %s)", url, compressions)
+	return fmt.Errorf("unable to find %s (tried all of %q)", url, compressions)
 }
 
 func (source Source) fetch(can *resolver.Candidates, arches ...string) error {
