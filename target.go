@@ -10,6 +10,7 @@ var (
 )
 
 func DebianSources(suite string, components ...string) Sources {
+	suite = strings.TrimSuffix(suite, "-security")
 	source := Source{
 		Types:      DefaultTypes,
 		URIs:       DefaultDebianURIs,
