@@ -5,8 +5,9 @@ import (
 )
 
 var (
-	DefaultTypes      = []string{"deb", "deb-src"}
-	DefaultDebianURIs = []string{"http://httpredir.debian.org/debian"}
+	DefaultTypes              = []string{"deb", "deb-src"}
+	DefaultDebianURIs         = []string{"http://httpredir.debian.org/debian"}
+	DefaultDebianSecurityURIs = []string{"http://security.debian.org"}
 )
 
 func DebianSources(suite string, components ...string) Sources {
@@ -35,7 +36,7 @@ func DebianSources(suite string, components ...string) Sources {
 	source.Suites = append(source.Suites, suite+"-updates")
 	sources := New(source, Source{
 		Types:      source.Types,
-		URIs:       []string{"http://security.debian.org"},
+		URIs:       DefaultDebianSecurityURIs,
 		Suites:     []string{suite + "/updates"},
 		Components: source.Components,
 	})
