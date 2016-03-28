@@ -5,7 +5,8 @@ import (
 )
 
 var (
-	DefaultTypes              = []string{"deb", "deb-src"}
+	DefaultTypes = []string{"deb", "deb-src"}
+
 	DefaultDebianURIs         = []string{"http://httpredir.debian.org/debian"}
 	DefaultDebianSecurityURIs = []string{"http://security.debian.org"}
 )
