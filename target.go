@@ -9,6 +9,8 @@ var (
 
 	DefaultDebianURIs         = []string{"http://httpredir.debian.org/debian"}
 	DefaultDebianSecurityURIs = []string{"http://security.debian.org"}
+
+	DefaultUbuntuURIs = []string{"http://archive.ubuntu.com/ubuntu"}
 )
 
 func DebianSources(suite string, components ...string) Sources {
@@ -53,4 +55,13 @@ func DebianSources(suite string, components ...string) Sources {
 		}
 	}
 	return sources
+}
+
+func UbuntuSources(suite string, components ...string) Sources {
+	return New(Source{
+		Types:      DefaultTypes,
+		URIs:       DefaultUbuntuURIs,
+		Suites:     []string{suite, suite + "-updates", suite + "-security"},
+		Components: components,
+	})
 }
