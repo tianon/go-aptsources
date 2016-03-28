@@ -58,6 +58,8 @@ func DebianSources(suite string, components ...string) Sources {
 }
 
 func UbuntuSources(suite string, components ...string) Sources {
+	suite = strings.TrimSuffix(suite, "-updates")
+	suite = strings.TrimSuffix(suite, "-security")
 	return New(Source{
 		Types:      DefaultTypes,
 		URIs:       DefaultUbuntuURIs,
