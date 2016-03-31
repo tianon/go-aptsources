@@ -6,12 +6,13 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/xi2/xz"
 	"pault.ag/go/resolver"
 )
 
 // TODO rewrite all this
 
-var compressions = []string{".bz2", ".gz", ""}
+var compressions = []string{".xz", ".bz2", ".gz", ""}
 
 func fetchCandidates(can *resolver.Candidates, url string) error {
 	for _, comp := range compressions {
@@ -25,6 +26,12 @@ func fetchCandidates(can *resolver.Candidates, url string) error {
 		}
 		defer resp.Body.Close()
 		switch comp {
+		case ".xz":
+			reader, err := xz.NewReader(resp.Body, 0)
+			if err != nil {
+				return err
+			}
+			return can.AppendBinaryIndexReader(reader)
 		case ".bz2":
 			return can.AppendBinaryIndexReader(bzip2.NewReader(resp.Body))
 		case ".gz":
