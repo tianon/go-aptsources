@@ -1,4 +1,4 @@
-package aptsources
+package aptsources // import "go.tianon.xyz/aptsources"
 
 import (
 	"strings"
