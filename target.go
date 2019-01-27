@@ -8,7 +8,7 @@ var (
 	DefaultTypes = []string{"deb", "deb-src"}
 
 	DefaultDebianURIs         = []string{"http://deb.debian.org/debian"}
-	DefaultDebianSecurityURIs = []string{"http://security.debian.org"}
+	DefaultDebianSecurityURIs = []string{"http://security.debian.org/debian-security"}
 
 	DefaultUbuntuURIs = []string{"http://archive.ubuntu.com/ubuntu"}
 )
